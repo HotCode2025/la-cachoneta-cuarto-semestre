@@ -1,3 +1,3 @@
-| Fecha | Detalle |
-| :---: | :--- |
-| 11/08/26 | Se subió la primera clase del e-commerce básico con JavaScript |
+| Fecha | Detalle | Alumno |
+| :---: | :---: | :--: |
+| 11/08/26 | Se subió la primera clase del e-commerce básico con JavaScript | Emmanuel Yapura |
