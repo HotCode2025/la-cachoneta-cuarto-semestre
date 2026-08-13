@@ -1,56 +1,77 @@
-from usuario_dao import UsuarioDAO
 from usuario import Usuario
-continuar = True
+from logger_base import log
+from usuario_dao import UsuarioDAO
+from psycopg2 import DatabaseError, IntegrityError
 
-while continuar:
-  print("\n1. Listar usuarios")
-  print("2. Agregar usuario")
-  print("3. Actualizar usuario")
-  print("4. Eliminar usuario")
-  print("5. Salir")
+option = None
 
-  opcion = input("Seleccione una opción: ")
-  print(f"Usted seleccionó la opción: {opcion}\n")
+while option != 5:
+    print("""
+        Opciones: 
+        1. Listar usuarios
+        2. Agregar usuario
+        3. Modificar usuario
+        4. Eliminar usuario
+        5. Salir
+    """)
+    try:
+        option = int(input("Digite la opcion (1-5): "))
 
-  match opcion:
-    # Opcion 1 para listar usuarios
-    case "1":
-      print("Listando usuarios...")
-      from usuario_dao import UsuarioDAO
-      usuarios = UsuarioDAO.seleccionar()
-      for usuario in usuarios:
-        print(usuario)
+        if option == 1:
+            usuarios = UsuarioDAO.seleccionar()
+            for usuario in usuarios: 
+                log.info(usuario)
 
-    # Opcion 2 para agregar usuario
-    case "2":
-      print("Agregando usuario...")
-      from usuario_dao import UsuarioDAO
-      username = input("Ingrese el nombre del usuario: ")
-      password = input("Ingrese la contraseña del usuario: ")
-      usuario = Usuario(username=username, password=password)
-      usuarios_insertados = UsuarioDAO.insertar(usuario)
-      print(f"Usuarios insertados: {usuarios_insertados}")
+        elif option == 2:
+            new_user_name = input("Ingrese nombre de usuario: ").strip()
+            new_user_pass = input("Digite su contrasenia: ").strip()
+            
+            if not new_user_name or not new_user_pass:
+                log.warning("El usuario y la contraseña no pueden estar vacíos.")
+                continue
 
-    # Opcion 3 para actualizar usuario
-    case "3":
-      print("Actualizando usuario...")
-      from usuario_dao import UsuarioDAO
-      id_user = input("Ingrese el ID del usuario a actualizar: ")
-      username = input("Ingrese el nuevo nombre del usuario: ")
-      password = input("Ingrese la nueva contraseña del usuario: ")
-      usuario = Usuario(id_user=id_user, username=username, password=password)
-      usuarios_actualizados = UsuarioDAO.actualizar(usuario)
-      print(f"Usuarios actualizados: {usuarios_actualizados}")
+            usuario = Usuario(username=new_user_name, password=new_user_pass)
+            usuario_insertado = UsuarioDAO.insertar(usuario)
+            log.info(f"Usuario insertado: {usuario_insertado}")
 
-    # Opcion 4 para eliminar usuario
-    case "4":
-      print("Eliminando usuario...")
-      from usuario_dao import UsuarioDAO
-      id_user = input("Ingrese el ID del usuario a eliminar: ")
-      usuario = Usuario(id_user=id_user)
-      usuarios_eliminados = UsuarioDAO.eliminar(usuario)
-      print(f"Usuarios eliminados: {usuarios_eliminados}")
+        elif option == 3:
+            id_user = int(input("Digite el id del usuario a modificar: "))
+            user_name = input("Ingrese el nuevo nombre de usuario: ")
+            user_pass = input("Ingrese la nueva contrasenia: ")
+            
+            usuario = Usuario(id_user=id_user, username=user_name, password=user_pass)
+            usuario_actualizado = UsuarioDAO.actualizar(usuario)
+            if usuario_actualizado > 0:
+                log.info(f"Usuario actualizado: {usuario_actualizado}")
+            else:
+                log.warning("No se encontró ningún usuario con ese ID.")
 
-    # Opcion 5 para salir
-    case "5":
-      continuar = False
+        elif option == 4:
+            id_user = int(input("Ingrese el id del usuario a eliminar: "))
+            usuario = Usuario(id_user=id_user)
+            usuario_eliminado = UsuarioDAO.eliminar(usuario)
+            if usuario_eliminado > 0:
+                log.info(f"Usuario eliminado: {usuario_eliminado}")
+            else:
+                log.warning("No se encontró ningún usuario con ese ID.")
+        elif option < 1 or option > 5:
+            log.warning("Opción fuera de rango. Seleccione un número de 1 a 5.")
+
+    except ValueError:
+        log.error("Error: Debe ingresar un número entero válido.")
+
+    except IntegrityError as e:
+        log.error(f"Error de integridad en la BD (posible usuario duplicado): {e}")
+
+    except DatabaseError as e:
+        log.error(f"Error general en la base de datos: {e}")
+
+    except KeyboardInterrupt:
+        log.info("\nPrograma interrumpido por el usuario.")
+        break
+
+    except Exception as e:
+        log.error(f"Ocurrió un error inesperado: {e}")
+
+else:
+    log.info("El usuario salió del menú.")
