@@ -30,8 +30,4 @@ class Usuario:
         self._password = password
 
     def __str__(self):
-        return f'''
-            Id: {self.id_user}
-            Username: {self.username}
-            Password: {self.password}
-            '''
+        return f''' Id: {self.id_user}, Username: {self.username}, Password: {self.password}'''
