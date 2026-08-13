@@ -11,7 +11,7 @@ class UsuarioDAO:
                   Update -> Actualizar
                   Delete -> Eliminar
   """
-  _SELECCIONAR = "SELECT * FROM usuario"
+  _SELECCIONAR = "SELECT * FROM usuario ORDER BY id_user"
   _INSERTAR = "INSERT INTO usuario(username, password) VALUES (%s, %s)"
   _ACTUALIZAR = "UPDATE usuario SET username=%s, password=%s WHERE id_user=%s"
   _ELIMINAR = "DELETE FROM usuario WHERE id_user=%s"
