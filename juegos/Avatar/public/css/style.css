@@ -1,3 +1,41 @@
+:root {
+  /* Tipografías */
+  --font-primary: "Share Tech Mono", monospace;
+  --font-header: "Sekuya", system-ui;
+
+  /* Colores base */
+  --bg-main: rgba(22, 22, 22, 0.9);
+  --bg-dark: #000000;
+  --text-color: #ffffff;
+
+  /* Tema Rojo / Jugador */
+  --red-bg: rgba(180, 7, 7, 0.2);
+  --red-border: rgb(160, 3, 3);
+
+  /* Tema Azul / Computadora / Ataques */
+  --blue-bg: rgba(40, 78, 104, 0.5);
+  --blue-border: rgb(135, 161, 233);
+  --blue-hover-bg: rgba(22, 54, 75, 0.5);
+  --blue-hover-border: rgb(75, 114, 221);
+  --blue-alt-bg: rgba(70, 73, 119, 0.2);
+  --blue-alt-border: rgb(139, 141, 248);
+
+  /* Tema Verde / Logs */
+  --green-bg: rgba(32, 82, 53, 0.5);
+  --green-border: rgb(97, 197, 127);
+
+  /* Tema Selección (Checked) */
+  --selected-bg: rgba(213, 218, 221, 0.5);
+  --selected-border: rgb(208, 213, 226);
+
+  /* Bordes y Estilos */
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+  --shadow-main: 0px 0px 20px rgba(0, 0, 0, 0.8);
+  --text-shadow-header: 5px 5px 5px black;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -22,7 +60,7 @@ ul {
 }
 
 body {
-  font-family: "Share Tech Mono", monospace;
+  font-family: var(--font-primary);
   font-weight: 300;
   font-style: normal;
   display: flex;
@@ -32,23 +70,23 @@ body {
   width: fit-content;
   max-width: 650px;
   margin: 1rem;
-  background-color: rgba(22, 22, 22, 0.9);
+  background-color: var(--bg-main);
   backdrop-filter: blur(20px);
-  border-radius: 15px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-main);
   padding: 1.5rem;
   text-align: center;
-  color: white;
+  color: var(--text-color);
 }
 
 button {
-  font-family: "Share Tech Mono", monospace;
+  font-family: var(--font-primary);
   font-weight: 400;
   font-style: normal;
-  background-color: rgba(180, 7, 7, 0.2);
-  border: 1px solid rgb(160, 3, 3);
-  border-radius: 10px;
-  color: white;
+  background-color: var(--red-bg);
+  border: 1px solid var(--red-border);
+  border-radius: var(--radius-md);
+  color: var(--text-color);
   font-size: 15px;
   padding: 0.25rem 0.5rem;
   cursor: pointer;
@@ -62,13 +100,13 @@ header {
   padding: 1rem;
 
   & h1 {
-    font-family: "Sekuya", system-ui;
+    font-family: var(--font-header);
     font-weight: 400;
     font-style: normal;
     font-size: clamp(2rem, 5vw, 3rem);
     margin-bottom: 1rem;
     letter-spacing: 3px;
-    text-shadow: 5px 5px 5px black;
+    text-shadow: var(--text-shadow-header);
   }
 
   & span {
@@ -77,21 +115,21 @@ header {
 }
 
 #personaje-seleccionado {
-  background-color: rgba(180, 7, 7, 0.2);
-  border: 1px solid rgb(160, 3, 3);
+  background-color: var(--red-bg);
+  border: 1px solid var(--red-border);
   justify-self: center;
   padding: 0.2rem 1rem;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   margin: 0;
   margin-top: 0.5rem;
 }
 
 #personaje-computadora {
-  background-color: rgba(70, 73, 119, 0.2);
-  border: 1px solid rgb(139, 141, 248);
+  background-color: var(--blue-alt-bg);
+  border: 1px solid var(--blue-alt-border);
   justify-self: center;
   padding: 0.2rem 1rem;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   margin: 0;
   margin-top: 0.5rem;
 }
@@ -105,15 +143,15 @@ header {
 }
 
 #seleccionar-ataque button {
-  background-color: rgba(40, 78, 104, 0.5);
-  border: 1px solid rgb(135, 161, 233);
+  background-color: var(--blue-bg);
+  border: 1px solid var(--blue-border);
   font-size: 19px;
 }
 
 .log-ataque {
-  background-color: rgba(32, 82, 53, 0.5);
-  border: 1px solid rgb(97, 197, 127);
-  border-radius: 10px;
+  background-color: var(--green-bg);
+  border: 1px solid var(--green-border);
+  border-radius: var(--radius-md);
   width: 100%;
   max-width: 500px;
 }
@@ -136,9 +174,9 @@ header {
   & div {
     max-width: 500px;
     font-size: 0.9rem;
-    background-color: #000000;
+    background-color: var(--bg-dark);
     padding: 15px;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     margin-bottom: 20px;
   }
 }
@@ -172,20 +210,20 @@ header {
     width: 60px;
     height: 60px;
     object-fit: contain;
-    background-color: rgba(40, 78, 104, 0.5);
-    border: 1px solid rgb(135, 161, 233);
+    background-color: var(--blue-bg);
+    border: 1px solid var(--blue-border);
     padding: 0.5rem;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
   }
 
   & img:hover {
-    background-color: rgba(22, 54, 75, 0.5);
-    border: 1px solid rgb(75, 114, 221);
+    background-color: var(--blue-hover-bg);
+    border: 1px solid var(--blue-hover-border);
   }
 
   & input:checked + img {
-    background-color: rgba(213, 218, 221, 0.5);
-    border: 1px solid rgb(208, 213, 226);
+    background-color: var(--selected-bg);
+    border: 1px solid var(--selected-border);
   }
 }
 
@@ -194,8 +232,8 @@ header {
   width: 100%;
   max-width: 400px;
   overflow-y: auto;
-  border: 1px solid rgb(97, 197, 127);
-  border-radius: 10px;
+  border: 1px solid var(--green-border);
+  border-radius: var(--radius-md);
   margin: 1rem 0;
 
   display: flex;
