@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LA LEYENDA DE AANG: AVATAR</title>
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Sekuya&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>AVATAR</h1>
+    <span>🔥💧🌱🌪️</span>
+  </header>
+
+  <div id="reglas-juego">
+    <details>
+      <summary>
+        📜 Ver Reglas del Juego (Clic para abrir)
+      </summary>
+      <div>
+        <h3>¿Cómo se juega?</h3>
+        <ul>
+          <li>Elige tu personaje y la computadora elegirá uno al azar. Ambos inician con 3 vidas.</li>
+          <li>Selecciona tu ataque en cada ronda.</li>
+        </ul>
+        <h3>¿Quién gana a quién?</h3>
+        <ul>
+          <li>✊ <strong>Puño</strong> le gana a 👣 Barrida</li>
+          <li>🦶 <strong>Patada</strong> le gana a ✊ Puño</li>
+          <li>👣 <strong>Barrida</strong> le gana a 🦶 Patada</li>
+          <li>🤝 <strong>¡Los empates te favorecen!</strong> Si ambos eligen lo mismo, ¡tú ganas!</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <section id="seleccionar-personaje">
+    <h2>Elige tu personaje</h2>
+    <div class="seleccionar-personaje-content">
+      <label for="zuko">
+        <input type="radio" name="personaje" id="zuko">
+        Zuko 🔥 <img src="assets/Zuko.ico" alt="Zuko">
+      </label>
+      <label for="katara">
+        <input type="radio" name="personaje" id="katara">
+        Katara 💧 <img src="assets/Katara.ico" alt="Katara">
+      </label>
+      <label for="aang">
+        <input type="radio" name="personaje" id="aang">
+        Aang 🌪️ <img src="assets/Aang.ico" alt="Aang">
+      </label>
+      <label for="toph">
+        <input type="radio" name="personaje" id="toph">
+        Toph 🌱 <img src="assets/Toph.ico" alt="Toph">
+      </label>
+
+      <button id="boton-personaje">Seleccionar</button>
+    </div>
+  </section>
+
+  <section id="seleccionar-ataque">
+    <h2>Elige tu ataque</h2>
+    <p id="personaje-seleccionado">Tu personaje tiene <span>3</span> vidas</p>
+    <p id="personaje-computadora">El personaje del enemigo tienen <span>3</span> vidas</p>
+    <p id="botones-ataques">
+      <button id="boton-punio">Puño ✊</button>
+      <button id="boton-patada">Patada 🦶</button>
+      <button id="boton-barrida">Barrida 👣</button>
+    </p>
+  </section>
+
+  <section id="mensajes">
+  </section>
+
+  <section id="reiniciar">
+    <button id="boton-reiniciar">Reiniciar</button>
+  </section>
+  <script src="./js/avatar.js"></script>
+</body>
+
+</html>

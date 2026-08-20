@@ -126,3 +126,9 @@
 04:12:55 PM:DEBUG [cursor_del_pool.py:16] Se ejecuta el método exit
 04:12:55 PM:DEBUG [cursor_del_pool.py:22] Commit de la transacción
 04:12:55 PM:DEBUG [conexion.py:47] Regresamos la conexión al pool: <connection object at 0x00000200E77C2F00; dsn: 'user=agus_postgre password=xxx dbname=test_bd host=127.0.0.1 port=5432', closed: 0>
+09:40:34 PM:INFO [menu_app_usuarios.py:23]  Id: 1, Username: Ezequiel, Password: testPassword2
+09:40:34 PM:INFO [menu_app_usuarios.py:23]  Id: 2, Username: Emmanuel, Password: passwordTest
+09:40:47 PM:WARNING [menu_app_usuarios.py:58] Opción fuera de rango. Seleccione un número de 1 a 5.
+09:40:50 PM:WARNING [menu_app_usuarios.py:58] Opción fuera de rango. Seleccione un número de 1 a 5.
+09:41:56 PM:INFO [menu_app_usuarios.py:70] 
+Programa interrumpido por el usuario.
