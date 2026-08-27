@@ -7,36 +7,37 @@ let nombrePersonajeEnemigo = ""
 const PERSONAJES = ["Zuko 🔥", "Katara 💧", "Aang 🌪️", "Toph 🌱"]
 const ATAQUES = ["Puño ✊", "Patada 🦶", "Barrida 👣"]
 
-// Referencias al DOM - inputs
+/* REFERENCIAS AL DOM */
+// inputs
 const radioZuko = document.getElementById("zuko")
 const radioKatara = document.getElementById("katara")
 const radioAang = document.getElementById("aang")
 const radioToph = document.getElementById("toph")
 
-// Referencias al DOM - secciones
+// secciones
 const seccionPersonaje = document.getElementById("seleccionar-personaje")
 const seccionAtaque = document.getElementById("seleccionar-ataque")
 const seccionMensajes = document.getElementById("mensajes")
 const seccionReiniciar = document.getElementById("reiniciar")
 const seccionReglas = document.getElementById("reglas-juego")
 
-// Referencias al DOM - textos / spans
+// textos / spans
 const pPersonajeSeleccionado = document.getElementById("personaje-seleccionado")
 const spanPersonajeComputadora = document.getElementById("personaje-computadora")
 
-// Referencias al DOM - botones
+// botones
 const botonPersonajeJugador = document.getElementById("boton-personaje")
 const botonPunio = document.getElementById("boton-punio")
 const botonPatada = document.getElementById("boton-patada")
 const botonBarrida = document.getElementById("boton-barrida")
 const botonReiniciar = document.getElementById("boton-reiniciar")
 
-// Referencias al DOM para el Modal
+// Modal de reglas del juego
 const modalReglas = document.getElementById("modal-reglas")
 const botonReglas = document.getElementById("boton-reglas")
 const botonCerrarReglas = document.getElementById("boton-cerrar-reglas")
 
-// Lógica del Juego
+// LOGICA
 function azar(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
