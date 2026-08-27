@@ -1,23 +1,23 @@
 :root {
   /* Tipografías */
   --font-primary: "Share Tech Mono", monospace;
-  --font-header: "Sekuya", system-ui;
+  --font-header: "AvatarAirbender", system-ui, sans-serif;
 
   /* Colores base */
-  --bg-main: rgba(22, 22, 22, 0.9);
+  --bg-main: rgba(22, 22, 22, 0.95);
   --bg-dark: #000000;
   --text-color: #ffffff;
 
   /* Tema Rojo / Jugador */
-  --red-bg: rgba(180, 7, 7, 0.2);
+  --red-bg: rgba(180, 7, 7, 0.3);
   --red-border: rgb(160, 3, 3);
 
   /* Tema Azul / Computadora / Ataques */
   --blue-bg: rgba(40, 78, 104, 0.5);
   --blue-border: rgb(135, 161, 233);
-  --blue-hover-bg: rgba(22, 54, 75, 0.5);
+  --blue-hover-bg: rgba(22, 54, 75, 0.8);
   --blue-hover-border: rgb(75, 114, 221);
-  --blue-alt-bg: rgba(70, 73, 119, 0.2);
+  --blue-alt-bg: rgba(70, 73, 119, 0.3);
   --blue-alt-border: rgb(139, 141, 248);
 
   /* Tema Verde / Logs */
@@ -25,10 +25,10 @@
   --green-border: rgb(97, 197, 127);
 
   /* Tema Selección (Checked) */
-  --selected-bg: rgba(213, 218, 221, 0.5);
-  --selected-border: rgb(208, 213, 226);
+  --selected-bg: rgba(213, 218, 221, 0.3);
+  --selected-border: #ffffff;
 
-  /* Bordes y Estilos */
+  /* Estilos */
   --radius-sm: 5px;
   --radius-md: 10px;
   --radius-lg: 15px;
@@ -40,6 +40,14 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+@font-face {
+  font-family: 'AvatarAirbender';
+  src: url('../assets/Fuente/AvatarAirbender.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 html {
@@ -54,198 +62,249 @@ html {
   align-items: center;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
 body {
   font-family: var(--font-primary);
-  font-weight: 300;
-  font-style: normal;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: fit-content;
-  max-width: 650px;
+  width: 100%;
+  max-width: 750px;
   margin: 1rem;
   background-color: var(--bg-main);
   backdrop-filter: blur(20px);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-main);
-  padding: 1.5rem;
+  padding: 2rem;
   text-align: center;
   color: var(--text-color);
 }
 
-button {
-  font-family: var(--font-primary);
-  font-weight: 400;
-  font-style: normal;
-  background-color: var(--red-bg);
-  border: 1px solid var(--red-border);
-  border-radius: var(--radius-md);
-  color: var(--text-color);
-  font-size: 15px;
-  padding: 0.25rem 0.5rem;
-  cursor: pointer;
+.ocultar {
+  display: none !important;
 }
 
-header {
+header h1 {
+  font-family: var(--font-header);
+  font-size: 4.5rem;
+  letter-spacing: 3px;
+  text-shadow: var(--text-shadow-header);
+  margin-bottom: 1rem;
+}
+
+/* Reglas del juego */
+
+dialog {
+  border: 2px solid var(--blue-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-main);
+  color: var(--text-color);
+  padding: 1.5rem;
+  max-width: 500px;
+  width: 90%;
+  margin: auto; /* Centra el dialog en la pantalla */
+  box-shadow: var(--shadow-main);
+}
+
+/* Oscurece el fondo de la página mientras el pop-up de reglas de juego está abierto */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.contenido-modal h2 {
+  font-family: var(--font-header);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.contenido-modal h3 {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: var(--blue-border);
+}
+
+.contenido-modal ul {
+  text-align: left;
+  margin: 0.5rem 0 1rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.contenido-modal li {
+  margin-bottom: 0.3rem;
+}
+
+#boton-cerrar-reglas {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+#boton-reglas {
+  background-color: var(--blue-bg);
+  border: 1px solid var(--blue-border);
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+#boton-reglas:hover {
+  background-color: var(--blue-hover-bg);
+  border-color: var(--blue-hover-border);
+  transform: translateY(-2px);
+}
+
+/* SELECCIÓN DE PERSONAJES */
+#seleccionar-personaje {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.seleccionar-personaje-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.tarjeta-personaje {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--blue-bg);
+  border: 2px solid var(--blue-border);
+  border-radius: var(--radius-md);
   padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
 
-  & h1 {
-    font-family: var(--font-header);
-    font-weight: 400;
-    font-style: normal;
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 1rem;
-    letter-spacing: 3px;
-    text-shadow: var(--text-shadow-header);
-  }
+.tarjeta-personaje input {
+  display: none;
+}
 
-  & span {
-    font-size: clamp(1.2rem, 4vw, 2rem);
-  }
+.tarjeta-personaje img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.tarjeta-personaje span {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.tarjeta-personaje:hover {
+  transform: translateY(-5px);
+  background-color: var(--blue-hover-bg);
+  border-color: var(--blue-hover-border);
+}
+
+/* Estado cuando la tarjeta está seleccionada */
+.tarjeta-personaje:has(input:checked) {
+  background-color: var(--selected-bg);
+  border-color: var(--selected-border);
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+#boton-personaje {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* PANTALLA DE BATALLA */
+#seleccionar-ataque {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hud-combate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  width: 100%;
 }
 
 #personaje-seleccionado {
   background-color: var(--red-bg);
   border: 1px solid var(--red-border);
-  justify-self: center;
-  padding: 0.2rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: var(--radius-md);
-  margin: 0;
-  margin-top: 0.5rem;
 }
 
 #personaje-computadora {
   background-color: var(--blue-alt-bg);
   border: 1px solid var(--blue-alt-border);
-  justify-self: center;
-  padding: 0.2rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: var(--radius-md);
-  margin: 0;
-  margin-top: 0.5rem;
 }
 
-#botones-ataques {
+/* LOG DE MENSAJES */
+#mensajes {
+  height: 220px;
+  width: 100%;
+  max-width: 550px;
+  overflow-y: auto;
+  border: 1px solid var(--green-border);
+  border-radius: var(--radius-md);
+  padding: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 2rem;
-  gap: 15px;
-}
-
-#seleccionar-ataque button {
-  background-color: var(--blue-bg);
-  border: 1px solid var(--blue-border);
-  font-size: 19px;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
 }
 
 .log-ataque {
   background-color: var(--green-bg);
   border: 1px solid var(--green-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  font-size: 0.95rem;
   width: 100%;
-  max-width: 500px;
 }
 
-/* Summary styles */
-#reglas-juego {
-  & details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  & summary {
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-
-  & div {
-    max-width: 500px;
-    font-size: 0.9rem;
-    background-color: var(--bg-dark);
-    padding: 15px;
-    border-radius: var(--radius-sm);
-    margin-bottom: 20px;
-  }
-}
-
-.seleccionar-personaje-content {
+#botones-ataques {
   display: flex;
+  gap: 15px;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin: 1rem 0;
-
-  & #boton-personaje {
-    width: 100%;
-    margin-top: 1rem;
-  }
-
-  & input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  & label {
-    font-size: 0px;
-    cursor: pointer;
-  }
-
-  & img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    background-color: var(--blue-bg);
-    border: 1px solid var(--blue-border);
-    padding: 0.5rem;
-    border-radius: var(--radius-sm);
-  }
-
-  & img:hover {
-    background-color: var(--blue-hover-bg);
-    border: 1px solid var(--blue-hover-border);
-  }
-
-  & input:checked + img {
-    background-color: var(--selected-bg);
-    border: 1px solid var(--selected-border);
-  }
 }
 
-#mensajes {
-  height: 200px;
-  width: 100%;
-  max-width: 400px;
-  overflow-y: auto;
-  border: 1px solid var(--green-border);
+#botones-ataques button {
+  background-color: var(--blue-bg);
+  border: 1px solid var(--blue-border);
+  font-size: 1.1rem;
+  padding: 0.6rem 1.2rem;
+}
+
+button {
+  background-color: var(--red-bg);
+  border: 1px solid var(--red-border);
   border-radius: var(--radius-md);
-  margin: 1rem 0;
+  color: var(--text-color);
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  & p {
-    width: 95%;
-    margin-bottom: 1rem;
-  }
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+button:hover {
+  filter: brightness(1.3);
 }

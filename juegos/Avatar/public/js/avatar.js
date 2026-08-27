@@ -1,92 +1,122 @@
-/* Array de los ataques, sirve para cuando necesito generar un ataque random para la computadora */
-const ATAQUES = ["Puño ✊", "Patada 🦶", "Barrida 👣"]
+// Variables globales del juego
+let vidasJugador = 3
+let vidasEnemigo = 3
+let nombrePersonajeJugador = ""
+let nombrePersonajeEnemigo = ""
+
 const PERSONAJES = ["Zuko 🔥", "Katara 💧", "Aang 🌪️", "Toph 🌱"]
+const ATAQUES = ["Puño ✊", "Patada 🦶", "Barrida 👣"]
 
-/* Variables globales para los elementos del DOM */
-let spanPersonajeComputadora
-let pPersonajeSeleccionado
-let sectionMensajes
-let botonPersonajeJugador
-let inputPersonajes
-let botonesAtaques
+// Referencias al DOM - inputs
+const radioZuko = document.getElementById("zuko")
+const radioKatara = document.getElementById("katara")
+const radioAang = document.getElementById("aang")
+const radioToph = document.getElementById("toph")
 
-/* la funcion con la formula milagrosa para sacar numeros aleatorios */
+// Referencias al DOM - secciones
+const seccionPersonaje = document.getElementById("seleccionar-personaje")
+const seccionAtaque = document.getElementById("seleccionar-ataque")
+const seccionMensajes = document.getElementById("mensajes")
+const seccionReiniciar = document.getElementById("reiniciar")
+const seccionReglas = document.getElementById("reglas-juego")
+
+// Referencias al DOM - textos / spans
+const pPersonajeSeleccionado = document.getElementById("personaje-seleccionado")
+const spanPersonajeComputadora = document.getElementById("personaje-computadora")
+
+// Referencias al DOM - botones
+const botonPersonajeJugador = document.getElementById("boton-personaje")
+const botonPunio = document.getElementById("boton-punio")
+const botonPatada = document.getElementById("boton-patada")
+const botonBarrida = document.getElementById("boton-barrida")
+const botonReiniciar = document.getElementById("boton-reiniciar")
+
+// Referencias al DOM para el Modal
+const modalReglas = document.getElementById("modal-reglas")
+const botonReglas = document.getElementById("boton-reglas")
+const botonCerrarReglas = document.getElementById("boton-cerrar-reglas")
+
+// Lógica del Juego
 function azar(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-/* Esta funcion sirve para que la computadora eliga un personaje aleatorio, el nombre de la funcion es medio ambiguo igual, espero que se entienda con este comentario jaja*/
-function aleatoria() {
-  const personajeAleatorio = azar(0, PERSONAJES.length - 1)
-  spanPersonajeComputadora.innerHTML = `El personaje del enemigo ${PERSONAJES[personajeAleatorio]} tiene <span>3</span> vidas`
-}
+// Eventos para abrir y cerrar pop-up de reglas del juego
+botonReglas.addEventListener('click', () => {
+  modalReglas.showModal()
+})
 
-/* En esta funcion modificamos los elementos p del html para mostrar el personaje que elegimos o si no elegimos ningun personaje */
-function seleccionarPersonajeJugador(personaje) {
-  console.log(personaje)
-  if (personaje) {
-    pPersonajeSeleccionado.innerHTML = `Tu personaje ${personaje} tiene <span>3</span> vidas`
-    aleatoria()
+botonCerrarReglas.addEventListener('click', () => {
+  modalReglas.close()
+})
+
+function seleccionarPersonajeJugador() {
+  if (radioZuko.checked) {
+    nombrePersonajeJugador = "Zuko 🔥"
+  } else if (radioKatara.checked) {
+    nombrePersonajeJugador = "Katara 💧"
+  } else if (radioAang.checked) {
+    nombrePersonajeJugador = "Aang 🌪️"
+  } else if (radioToph.checked) {
+    nombrePersonajeJugador = "Toph 🌱"
   } else {
-    pPersonajeSeleccionado.innerHTML = `Debes elegir un personaje`
+    alert("Selecciona un personaje para continuar")
+    return
   }
+
+  pPersonajeSeleccionado.innerHTML = `Tu personaje (${nombrePersonajeJugador}) tiene <span>${vidasJugador}</span> vidas`
+  
+  seleccionarPersonajeEnemigo()
+
+  // Transición de pantallas
+  seccionPersonaje.classList.add("ocultar")
+  seccionReglas.classList.add("ocultar")
+  seccionAtaque.classList.remove("ocultar")
 }
 
-/* Funcion para calcular de forma aleatoria el ataque de la computadora*/
+function seleccionarPersonajeEnemigo() {
+  const personajeAleatorio = azar(0, PERSONAJES.length - 1)
+  nombrePersonajeEnemigo = PERSONAJES[personajeAleatorio]
+  spanPersonajeComputadora.innerHTML = `El enemigo (${nombrePersonajeEnemigo}) tiene <span>${vidasEnemigo}</span> vidas`
+}
+
 function calcularAtaqueComputadora() {
-  let ataqueComputadora = ATAQUES[azar(0, ATAQUES.length - 1)]
-  return ataqueComputadora
+  return ATAQUES[azar(0, ATAQUES.length - 1)]
 }
 
-/* Logica de combate, igualito a la logica del piedra papel y tijeras, pero modificado para este juego, debemos agregar reglas luego para que se entienda cuando se gana o cuando se pierde */
 function combatir(ataqueJugador, ataqueComputadora) {
   if (ataqueJugador === ataqueComputadora) {
-    return 'GANASTE.'
-  } else if (ataqueJugador === 'Puño ✊' && ataqueComputadora === 'Barrida 👣') {
-    return 'GANASTE.'
-  } else if (ataqueJugador === 'Patada 🦶' && ataqueComputadora === 'Puño ✊') {
-    return 'GANASTE.'
-  } else if (ataqueJugador === 'Barrida 👣' && ataqueComputadora === 'Patada 🦶') {
-    return 'GANASTE.'
+    return '¡EMPATE!'
+  } else if (
+    (ataqueJugador === 'Puño ✊' && ataqueComputadora === 'Barrida 👣') ||
+    (ataqueJugador === 'Patada 🦶' && ataqueComputadora === 'Puño ✊') ||
+    (ataqueJugador === 'Barrida 👣' && ataqueComputadora === 'Patada 🦶')
+  ) {
+    return 'GANASTE LA RONDA.'
   } else {
-    return 'PERDISTE.'
+    return 'PERDISTE LA RONDA.'
   }
 }
 
-/* Este es la funcion para mostrar el log del combate, crea un elemento html con contenido (tambien agregue un classname para modificarlo con css para que se vea bonito en pantalla), luego lo agregamos a un section usando appendChild */
 function crearMensaje(ataqueJugador, ataqueComputadora, resultado) {
   let parrafo = document.createElement('p')
-
   parrafo.className = 'log-ataque'
-  parrafo.innerHTML = `Tu personaje atacó con ${ataqueJugador}, el personaje del enemigo atacó con ${ataqueComputadora}. Resultado: ${resultado}`
-  sectionMensajes.prepend(parrafo)
+  parrafo.innerHTML = `Atacaste con <strong>${ataqueJugador}</strong> | Enemigo usó <strong>${ataqueComputadora}</strong><br><em>Resultado: ${resultado}</em>`
+  seccionMensajes.prepend(parrafo)
 }
 
-/* Esta funcion la creo el profe en clase, y como el codigo que he hecho ha sido diferente al de las clases para ir aprendiendo, supuse que asi deberia de estar bien, el codigo funciona. Imagino que luego podemos usar el iniciarJuego() dentro de una funcion reiniciar() para bueno, reiniciar el juego obviamente jaja */
 function iniciarJuego() {
-  spanPersonajeComputadora = document.getElementById('personaje-computadora')
-  pPersonajeSeleccionado = document.getElementById('personaje-seleccionado')
-  sectionMensajes = document.getElementById('mensajes')
-  botonPersonajeJugador = document.getElementById('boton-personaje')
-  inputPersonajes = document.getElementsByName('personaje')
-  botonesAtaques = document.getElementById('botones-ataques')
+  botonPersonajeJugador.addEventListener('click', seleccionarPersonajeJugador)
 
-  /* Uso el boton para escuchar el click, luego chequeo (usando inputPersonajes y checked) cual fue el boton seleccionado, o en papel, el personaje seleccionado. Aca esta basicamente la inicializacion de la logica detras del saber que personaje eligio el jugador y generar un personaje aleatorio para la computadora*/
-  botonPersonajeJugador.addEventListener('click', () => {
-    let personajeSeleccionado = [...inputPersonajes].findIndex((personaje) => personaje.checked)
-    let personaje = document.getElementsByTagName('label')[personajeSeleccionado]?.innerText || null
-    seleccionarPersonajeJugador(personaje)
-  })
-
-  /* Esta es la inicializacion de la logica del combate, utilizando delegacion de eventos */
-  botonesAtaques.addEventListener('click', (e) => {
-    if (e.target.tagName === 'BUTTON') {
-      let ataqueJugador = e.target.innerText
-      let ataqueComputadora = calcularAtaqueComputadora()
-      let resultado = combatir(ataqueJugador, ataqueComputadora)
-      crearMensaje(ataqueJugador, ataqueComputadora, resultado)
-    }
-  })
+  botonPunio.addEventListener('click', () => jugarRonda('Puño ✊'))
+  botonPatada.addEventListener('click', () => jugarRonda('Patada 🦶'))
+  botonBarrida.addEventListener('click', () => jugarRonda('Barrida 👣'))
 }
 
-iniciarJuego()
+function jugarRonda(ataqueJugador) {
+  let ataqueComputadora = calcularAtaqueComputadora()
+  let resultado = combatir(ataqueJugador, ataqueComputadora)
+  crearMensaje(ataqueJugador, ataqueComputadora, resultado)
+}
+
+window.addEventListener('load', iniciarJuego)

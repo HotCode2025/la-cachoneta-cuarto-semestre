@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -7,30 +7,31 @@
   <title>LA LEYENDA DE AANG: AVATAR</title>
   <link rel="stylesheet" href="./css/style.css">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Sekuya&family=Share+Tech+Mono&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <header>
     <h1>AVATAR</h1>
-    <span>🔥💧🌱🌪️</span>
   </header>
 
   <div id="reglas-juego">
-    <details>
-      <summary>
-        📜 Ver Reglas del Juego (Clic para abrir)
-      </summary>
-      <div>
+    <!-- Boton para abrir el pop-up -->
+    <button id="boton-reglas" type="button">📜 Ver Reglas del Juego</button>
+
+    <!-- Ventana Emergente / Pop-up -->
+    <dialog id="modal-reglas">
+      <div class="contenido-modal">
+        <h2>📜 Reglas del Juego</h2>
+
         <h3>¿Cómo se juega?</h3>
         <ul>
           <li>Elige tu personaje y la computadora elegirá uno al azar. Ambos inician con 3 vidas.</li>
           <li>Selecciona tu ataque en cada ronda.</li>
         </ul>
+
         <h3>¿Quién gana a quién?</h3>
         <ul>
           <li>✊ <strong>Puño</strong> le gana a 👣 Barrida</li>
@@ -38,51 +39,65 @@
           <li>👣 <strong>Barrida</strong> le gana a 🦶 Patada</li>
           <li>🤝 <strong>¡Los empates te favorecen!</strong> Si ambos eligen lo mismo, ¡tú ganas!</li>
         </ul>
+
+        <button id="boton-cerrar-reglas" type="button">Cerrar</button>
       </div>
+    </dialog>
     </details>
   </div>
 
+  <!-- SELECCIÓN DE PERSONAJES -->
   <section id="seleccionar-personaje">
     <h2>Elige tu personaje</h2>
     <div class="seleccionar-personaje-content">
-      <label for="zuko">
+      <label for="zuko" class="tarjeta-personaje">
         <input type="radio" name="personaje" id="zuko">
-        Zuko 🔥 <img src="assets/Zuko.ico" alt="Zuko">
-      </label>
-      <label for="katara">
-        <input type="radio" name="personaje" id="katara">
-        Katara 💧 <img src="assets/Katara.ico" alt="Katara">
-      </label>
-      <label for="aang">
-        <input type="radio" name="personaje" id="aang">
-        Aang 🌪️ <img src="assets/Aang.ico" alt="Aang">
-      </label>
-      <label for="toph">
-        <input type="radio" name="personaje" id="toph">
-        Toph 🌱 <img src="assets/Toph.ico" alt="Toph">
+        <img src="assets/Zuko.ico" alt="Zuko">
+        <span>Zuko 🔥</span>
       </label>
 
-      <button id="boton-personaje">Seleccionar</button>
+      <label for="katara" class="tarjeta-personaje">
+        <input type="radio" name="personaje" id="katara">
+        <img src="assets/Katara.ico" alt="Katara">
+        <span>Katara 💧</span>
+      </label>
+
+      <label for="aang" class="tarjeta-personaje">
+        <input type="radio" name="personaje" id="aang">
+        <img src="assets/Aang.ico" alt="Aang">
+        <span>Aang 🌪️</span>
+      </label>
+
+      <label for="toph" class="tarjeta-personaje">
+        <input type="radio" name="personaje" id="toph">
+        <img src="assets/Toph.ico" alt="Toph">
+        <span>Toph 🌱</span>
+      </label>
     </div>
+    <button id="boton-personaje">Confirmar Selección</button>
   </section>
 
-  <section id="seleccionar-ataque">
-    <h2>Elige tu ataque</h2>
-    <p id="personaje-seleccionado">Tu personaje tiene <span>3</span> vidas</p>
-    <p id="personaje-computadora">El personaje del enemigo tienen <span>3</span> vidas</p>
-    <p id="botones-ataques">
+  <!-- PANTALLA DE BATALLA -->
+  <section id="seleccionar-ataque" class="ocultar">
+    <div class="hud-combate">
+      <p id="personaje-seleccionado">Tu personaje tiene <span>3</span> vidas</p>
+      <p id="personaje-computadora">El personaje del enemigo tiene <span>3</span> vidas</p>
+    </div>
+
+    <!-- Log de mensajes -->
+    <section id="mensajes"></section>
+
+    <div id="botones-ataques">
       <button id="boton-punio">Puño ✊</button>
       <button id="boton-patada">Patada 🦶</button>
       <button id="boton-barrida">Barrida 👣</button>
-    </p>
+    </div>
   </section>
 
-  <section id="mensajes">
-  </section>
-
-  <section id="reiniciar">
+  <section id="reiniciar" class="ocultar">
     <button id="boton-reiniciar">Reiniciar</button>
   </section>
+
   <script src="./js/avatar.js"></script>
 </body>
 
