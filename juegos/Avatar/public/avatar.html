@@ -17,11 +17,10 @@
     <h1>AVATAR</h1>
   </header>
 
+  <!-- REGLAS DEL JUEGO -->
   <div id="reglas-juego">
-    <!-- Boton para abrir el pop-up -->
     <button id="boton-reglas" type="button">📜 Ver Reglas del Juego</button>
 
-    <!-- Ventana Emergente / Pop-up -->
     <dialog id="modal-reglas">
       <div class="contenido-modal">
         <h2>📜 Reglas del Juego</h2>
@@ -37,7 +36,6 @@
           <li>✊ <strong>Puño</strong> le gana a 👣 Barrida</li>
           <li>🦶 <strong>Patada</strong> le gana a ✊ Puño</li>
           <li>👣 <strong>Barrida</strong> le gana a 🦶 Patada</li>
-          <li>🤝 <strong>¡Los empates te favorecen!</strong> Si ambos eligen lo mismo, ¡tú ganas!</li>
         </ul>
 
         <button id="boton-cerrar-reglas" type="button">Cerrar</button>
@@ -49,30 +47,7 @@
   <!-- SELECCIÓN DE PERSONAJES -->
   <section id="seleccionar-personaje">
     <h2>Elige tu personaje</h2>
-    <div class="seleccionar-personaje-content">
-      <label for="zuko" class="tarjeta-personaje">
-        <input type="radio" name="personaje" id="zuko">
-        <img src="assets/Zuko.ico" alt="Zuko">
-        <span>Zuko 🔥</span>
-      </label>
-
-      <label for="katara" class="tarjeta-personaje">
-        <input type="radio" name="personaje" id="katara">
-        <img src="assets/Katara.ico" alt="Katara">
-        <span>Katara 💧</span>
-      </label>
-
-      <label for="aang" class="tarjeta-personaje">
-        <input type="radio" name="personaje" id="aang">
-        <img src="assets/Aang.ico" alt="Aang">
-        <span>Aang 🌪️</span>
-      </label>
-
-      <label for="toph" class="tarjeta-personaje">
-        <input type="radio" name="personaje" id="toph">
-        <img src="assets/Toph.ico" alt="Toph">
-        <span>Toph 🌱</span>
-      </label>
+    <div id="div-personajes" class="seleccionar-personaje-content">
     </div>
     <button id="boton-personaje">Confirmar Selección</button>
   </section>
@@ -84,7 +59,7 @@
       <p id="personaje-computadora">El personaje del enemigo tiene <span>3</span> vidas</p>
     </div>
 
-    <!-- Log de mensajes -->
+    <!-- LOG DE MENSAJES -->
     <section id="mensajes"></section>
 
     <div id="botones-ataques">
@@ -98,7 +73,8 @@
     <button id="boton-reiniciar">Reiniciar</button>
   </section>
 
-  <script src="./js/avatar.js"></script>
+  <script type="module" src="./js/Personaje.js"></script>
+  <script type="module" src="./js/avatar.js"></script>
 </body>
 
 </html>
