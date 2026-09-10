@@ -41,16 +41,67 @@
         <button id="boton-cerrar-reglas" type="button">Cerrar</button>
       </div>
     </dialog>
-    </details>
   </div>
 
   <!-- SELECCIÓN DE PERSONAJES -->
   <section id="seleccionar-personaje">
     <h2>Elige tu personaje</h2>
+
     <div id="div-personajes" class="seleccionar-personaje-content">
+      <!-- Se insertan Zuko, Katara, Aang, Toph -->
     </div>
+
+    <!-- TARJETA DEL PERSONAJE PERSONALIZADO -->
+    <div id="contenedor-personaje-personalizado">
+      <h2>Personaje Personalizado</h2>
+      <label class="tarjeta-personaje" id="tarjeta-personaje-personalizado" for="input-personaje-personalizado">
+        <input type="radio" name="personaje" id="input-personaje-personalizado" value="personalizado">
+        <img id="imagen-tarjeta-personalizado" src="./assets/avatarDefault.svg" alt="Avatar">
+        <span id="texto-tarjeta-personalizado">Crea o elige tu personaje!</span>
+      </label>
+    </div>
+
     <button id="boton-personaje">Confirmar Selección</button>
   </section>
+
+  <!-- MODAL DE CREACIÓN / SELECCIÓN MÚLTIPLE -->
+  <dialog id="modal-crear-personaje">
+    <div class="contenido-modal">
+      <h2>🎨 Crear Personaje</h2>
+      <label for="nombre-personaje-personalizado">
+        <h3>Nombre del personaje:</h3>
+        <input type="text" name="personaje-personalizado-name" id="nombre-personaje-personalizado"
+          placeholder="Ingrese nombre">
+      </label>
+
+      <label for="lista-elementos">
+        <h3>Elemento del personaje:</h3>
+        <select name="lista-elementos" id="lista-elementos">
+          <option value="💧 Agua">💧 Agua</option>
+          <option value="🔥 Fuego">🔥 Fuego</option>
+          <option value="🌪️ Aire">🌪️ Aire</option>
+          <option value="🌱 Tierra">🌱 Tierra</option>
+        </select>
+      </label>
+
+      <button id="boton-crear-personaje" type="button"> Guardar Nuevo Personaje</button>
+
+      <hr style="margin: 15px 0; border: 0.5px solid #ccc;">
+
+      <div id="elegir-personaje-creado">
+        <label for="lista-personajes-creados">
+          <h3>Personajes creados:</h3>
+          <select name="lista-personajes-creados" id="lista-personajes-creados">
+            <option value="">No tienes ningún personaje creado!</option>
+          </select>
+        </label>
+      </div>
+
+      <div style="margin-top: 15px;">
+        <button id="boton-cerrar-crear-personaje" type="button">Seleccionar Personaje!</button>
+      </div>
+    </div>
+  </dialog>
 
   <!-- PANTALLA DE BATALLA -->
   <section id="seleccionar-ataque" class="ocultar">
