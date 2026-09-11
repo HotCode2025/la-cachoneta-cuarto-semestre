@@ -4,3 +4,4 @@
 | 17/08/26 | 1° | Se subieron los videos restantes de la clase| German Fratucello |
 | 24/08/26 | 2° | Se subieron los videos de la clase numero 2 parte 1| German Fratucello |
 | 03/09/26 | 3° | Se subieron los videos de la clase 3 | Emmanuel Yapura |
+| 11/09/26 | 4° | Se subieron los videos de la clase 4 | Emmanuel Yapura |
