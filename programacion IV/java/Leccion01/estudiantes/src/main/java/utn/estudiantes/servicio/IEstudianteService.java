@@ -1,6 +1,5 @@
 package utn.estudiantes.servicio;
 
-import utn.estudiantes.modelo.Estudiante;
 import utn.estudiantes.modelo.Estudiante2026;
 
 import java.util.List;

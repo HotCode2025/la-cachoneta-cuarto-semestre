@@ -31,6 +31,13 @@ public class EstudiantesApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		logger.info(nl + "Ejecutando el metood run de Spring..." + nl);
+		var salir = false;
+		var consola = new Scanner(System.in);
+		while(!salir){
+			mostrarMenu();
+			salir = ejecutarOpciones(consola);
+			logger.info(nl);
+		} // fin ciclo while
 	}
 
 	private void mostrarMenu(){
