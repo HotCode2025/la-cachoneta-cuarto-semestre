@@ -19,11 +19,11 @@ import lombok.ToString;
 // Constructor con todos los argumentos
 @AllArgsConstructor
 @ToString
-public class Estudiante  {
+public class Estudiante2026  { //Lleva este nombre porque es el nombre que apunta a la tabla
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idEstudiante;
+    private Integer idestudiante;
     private String nombre;
     private String apellido;
     private String telefono;
