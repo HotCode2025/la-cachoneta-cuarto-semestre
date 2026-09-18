@@ -14,8 +14,6 @@ La Cachoneta
 | **Equipo 3** | Javascript | <ul><li>Agustín Gonzalez</li><li>Esteban Montenegro</li></ul> |
 
 ## Integrantes
-- Nicolás Cohen
-- Cristhian Barrientos
 - Ramiro Soria
 - Enzo Ulloa
 - Emmanuel Yapura
