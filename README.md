@@ -9,8 +9,8 @@ La Cachoneta
 
 | Equipo | Tecnología | Integrantes |
 | :--- | :--- | :--- |
-| **Equipo 1** | Java | <ul><li>Germán Fratucello</li></ul> |
-| **Equipo 2** | Python | <ul><li>Enzo Ulloa</li><li>Ramiro Soria</li><li>Emmanuel Yapura</li></ul> |
+| **Equipo 1** | Java | <ul><li>Germán Fratucello</li><li>Emmanuel Yapura</li></ul> |
+| **Equipo 2** | Python | <ul><li>Enzo Ulloa</li><li>Ramiro Soria</li></ul> |
 | **Equipo 3** | Javascript | <ul><li>Agustín Gonzalez</li><li>Esteban Montenegro</li></ul> |
 
 ## Integrantes
