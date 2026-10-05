@@ -6,3 +6,4 @@
 | 03/09/26 | 3° | Se subieron los videos de la clase 3 | Emmanuel Yapura |
 | 11/09/26 | 4° | Se subieron los videos de la clase 4 | Emmanuel Yapura |
 | 17/09/26 | 5° | Se subieron los videos de la clase 5 | Emmanuel Yapura |
+| 05/10/26 | 6° | Se subieron los videos de la clase 6, 7 y 8 | German Fratucello |
