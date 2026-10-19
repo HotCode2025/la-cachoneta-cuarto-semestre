@@ -1,9 +1,6 @@
 package utn.estudiantes.modelo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,11 +16,12 @@ import lombok.ToString;
 // Constructor con todos los argumentos
 @AllArgsConstructor
 @ToString
+@Table(name = "estudiantes2026")
 public class Estudiante2026  { //Lleva este nombre porque es el nombre que apunta a la tabla
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idestudiante;
+    private Integer idestudiantes2026;
     private String nombre;
     private String apellido;
     private String telefono;

@@ -31,6 +31,13 @@ public class EstudiantesApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		logger.info(nl + "Ejecutando el metood run de Spring..." + nl);
+		var salir = false;
+		var consola = new Scanner(System.in);
+		while(!salir){
+			mostrarMenu();
+			salir = ejecutarOpciones(consola);
+			logger.info(nl);
+		} // fin ciclo while
 	}
 
 	private void mostrarMenu(){
@@ -125,6 +132,9 @@ public class EstudiantesApplication implements CommandLineRunner {
 			case 6 -> {
 				logger.info("Hasta pronto!" + nl+ nl);
 				salir = true;
+			}
+			default -> {
+				logger.info("Opción inválida: " + opcion + ". Por favor, digite una opción del 1 al 6." + nl);
 			}
 		} // fin switch
 		return salir;
