@@ -238,7 +238,7 @@ def main():
     pygame.display.set_icon(recursos.cargar_imagen('001.jfif'))
 
     # Pantalla de inicio (se puede saltear con cualquier tecla)
-    mostrar_imagen_inicial(screen, 'inicio/logo.png', 3000)
+    mostrar_imagen_inicial(screen, 'inicio/cachoneta.png', 3000)
 
     # Cargar todas las imagenes y sonidos de la partida de una sola vez
     recursos.precargar()
