@@ -133,6 +133,9 @@ public class EstudiantesApplication implements CommandLineRunner {
 				logger.info("Hasta pronto!" + nl+ nl);
 				salir = true;
 			}
+			default -> {
+				logger.info("Opción inválida: " + opcion + ". Por favor, digite una opción del 1 al 6." + nl);
+			}
 		} // fin switch
 		return salir;
 	}
