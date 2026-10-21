@@ -43,8 +43,8 @@
 }
 
 @font-face {
-  font-family: 'AvatarAirbender';
-  src: url('../assets/Fuente/AvatarAirbender.ttf') format('truetype');
+  font-family: "AvatarAirbender";
+  src: url("../assets/Fuente/AvatarAirbender.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -53,7 +53,7 @@
 html {
   width: 100%;
   min-height: 100vh;
-  background-image: url('../assets/avatar.png');
+  background-image: url("../assets/avatar.png");
   background-repeat: repeat;
   background-position: center;
   background-size: cover;
@@ -268,17 +268,30 @@ dialog::backdrop {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  scrollbar-width: none; 
+  scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
 .log-ataque {
-  background-color: var(--green-bg);
-  border: 1px solid var(--green-border);
   border-radius: var(--radius-sm);
   padding: 0.5rem;
   font-size: 0.95rem;
   width: 100%;
+}
+
+.victoria {
+  background-color: var(--green-bg);
+  border: 1px solid var(--green-border);
+}
+
+.derrota {
+  background-color: var(--red-bg);
+  border: 1px solid var(--red-border);
+}
+
+.derrota {
+  background-color: var(--selected-bg);
+  border: 1px solid var(--selected-border);
 }
 
 #botones-ataques {
