@@ -6,3 +6,4 @@
 | 17/09/26 | 6° | Se subio la clase 6 de Node JS | Emmanuel Yapura |
 | 06/10/26 | 7° | Se subio la clase 7 de Node JS | Emmanuel Yapura |
 | 06/10/26 | 8° | Se subio la clase 8 de Node JS | Emmanuel Yapura |
+| 22/10/26 | 8° | Se subio la clase 9 y 10 de Node JS | Emmanuel Yapura |
