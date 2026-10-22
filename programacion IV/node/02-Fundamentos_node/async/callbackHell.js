@@ -37,6 +37,8 @@ hola('Ariel', function(nombre){
         console.log("Terminado el proceso..")
     });
 })
+
+// callback hell -> bienvenidos al infierno
 // hola("Carlos", function(nombre){
 //     hablar(function(){
 //         hablar(function(){
