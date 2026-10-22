@@ -225,10 +225,8 @@ function revisarVidas() {
 function crearMensajeFinal(mensajeResultadoFinal, jugadorGano) {
   let parrafo = document.createElement("p");
   parrafo.className = "log-ataque victoria";
-  if (jugadorGano === "PERDISTE LA RONDA.") {
+  if (!jugadorGano) {
     parrafo.className = "log-ataque derrota";
-  } else if (jugadorGano === "¡EMPATE!") {
-    parrafo.className = "log-ataque empate";
   }
   parrafo.innerHTML = `<strong>${mensajeResultadoFinal}</strong>`;
   seccionMensajes.prepend(parrafo);
@@ -245,9 +243,13 @@ function crearMensajeFinal(mensajeResultadoFinal, jugadorGano) {
 function crearMensaje(ataqueJugador, ataqueComputadora, resultado) {
   let parrafo = document.createElement("p");
   parrafo.className = "log-ataque victoria";
+  console.log(resultado === "PERDISTE LA RONDA.");
   if (resultado === "PERDISTE LA RONDA.") {
     parrafo.className = "log-ataque derrota";
+  } else if (resultado === "¡EMPATE!") {
+    parrafo.className = "log-ataque empate";
   }
+
   parrafo.innerHTML = `Atacaste con <strong>${ataqueJugador}</strong> | Enemigo usó <strong>${ataqueComputadora}</strong><br><em>Resultado: ${resultado}</em>`;
   seccionMensajes.prepend(parrafo);
 }

@@ -289,7 +289,7 @@ dialog::backdrop {
   border: 1px solid var(--red-border);
 }
 
-.derrota {
+.empate {
   background-color: var(--selected-bg);
   border: 1px solid var(--selected-border);
 }
