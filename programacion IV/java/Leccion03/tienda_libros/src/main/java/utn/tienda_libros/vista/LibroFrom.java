@@ -6,14 +6,22 @@ import utn.tienda_libros.modelo.Libro;
 import utn.tienda_libros.servicio.LibroServicio;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.StyleContext;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Locale;
 
 @Component
 public class LibroFrom extends JFrame {
     LibroServicio libroServicio;
     private JPanel panel;
     private JTable tablaLibros;
+    private JTextField idTexto;
     private JTextField libroTexto;
     private JTextField autorTexto;
     private JTextField precioTexto;
@@ -21,36 +29,35 @@ public class LibroFrom extends JFrame {
     private JButton agregarButton;
     private JButton modificarButton;
     private JButton eliminarButton;
-    private JButton a;
     private DefaultTableModel tablaModeloLibros;
     private Integer idLibroSeleccionado;
 
     @Autowired
-    public LibroFrom(LibroServicio libroServicio){
+    public LibroFrom(LibroServicio libroServicio) {
         this.libroServicio = libroServicio;
         iniciarForma();
 
         agregarButton.addActionListener(e -> agregarLibro());
         modificarButton.addActionListener(e -> modificarLibro());
         eliminarButton.addActionListener(e -> eliminarLibro());
-
     }
-    private void iniciarForma(){
+
+    private void iniciarForma() {
         setContentPane(panel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setSize(900,700);
+        setSize(900, 700);
         //Para obtener las dimensiones de las ventanas
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension tamanioPantalla = toolkit.getScreenSize();
-        int x = (tamanioPantalla.width - getWidth()/2);
-        int y = (tamanioPantalla.height - getHeight()/2);
+        int x = (tamanioPantalla.width - getWidth()) / 2;
+        int y = (tamanioPantalla.height - getHeight()) / 2;
         setLocation(x, y);
     }
 
-    private void agregarLibro(){
+    private void agregarLibro() {
         //Leer los valores del formulario
-        if(libroTexto.getText().equals("")){
+        if (libroTexto.getText().equals("")) {
             mostrarMensaje("Ingresa el nombre del libro");
             libroTexto.requestFocusInWindow();
             return;
@@ -60,7 +67,7 @@ public class LibroFrom extends JFrame {
         var precio = Double.parseDouble(precioTexto.getText());
         var existencias = Integer.parseInt(existenciasTexto.getText());
         //Creamos el objeto libro
-        var libro = new Libro(null, nombreLibro,autor,precio,existencias);
+        var libro = new Libro(null, nombreLibro, autor, precio, existencias);
         //libro.setNombreLibro(nombreLibro);
         //libro.setAutor(autor);
         //libro.setPrecio(precio);
@@ -70,6 +77,7 @@ public class LibroFrom extends JFrame {
         limpiarFormulario();
         listarLibros();
     }
+
     private void seleccionarLibro() {
 
         int filaSeleccionada = tablaLibros.getSelectedRow();
@@ -99,7 +107,6 @@ public class LibroFrom extends JFrame {
     }
 
     private void modificarLibro() {
-
         if (idLibroSeleccionado == null) {
             mostrarMensaje("Selecciona un libro de la tabla");
             return;
@@ -128,7 +135,6 @@ public class LibroFrom extends JFrame {
     }
 
     private void eliminarLibro() {
-
         if (idLibroSeleccionado == null) {
             mostrarMensaje("Selecciona un libro de la tabla");
             return;
@@ -156,22 +162,32 @@ public class LibroFrom extends JFrame {
                 listarLibros();
             }
         }
+
     }
 
 
-    private void limpiarFormulario(){
+    private void limpiarFormulario() {
         libroTexto.setText("");
         autorTexto.setText("");
         precioTexto.setText("");
         existenciasTexto.setText("");
     }
 
-    private void mostrarMensaje(String mensaje){
+    private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
     private void createUIComponents() {
-        this.tablaModeloLibros = new DefaultTableModel(0, 5);
+
+        idTexto = new JTextField("");
+        idTexto.setVisible(false);
+
+        this.tablaModeloLibros = new DefaultTableModel(0, 5) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
         String[] cabecera = {
                 "Id",
@@ -185,19 +201,21 @@ public class LibroFrom extends JFrame {
 
         this.tablaLibros = new JTable(tablaModeloLibros);
 
+        // evitamos seleccionar varios libros
+        tablaLibros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tablaLibros.getSelectionModel()
                 .addListSelectionListener(e -> seleccionarLibro());
 
         listarLibros();
     }
 
-    private void listarLibros(){
+    private void listarLibros() {
         //Limpiar la tabla
         tablaModeloLibros.setRowCount(0);
         //Obtener los libros de la BD
         var libros = libroServicio.listarLibros();
         //Iteramos cada libro
-        libros.forEach((libro) ->{
+        libros.forEach((libro) -> {
             //Creamos registro para agregarlos a la tabla
             Object[] renglonLibro = {
                     libro.getIdLibro(),
@@ -209,4 +227,5 @@ public class LibroFrom extends JFrame {
             this.tablaModeloLibros.addRow(renglonLibro);
         });
     }
+
 }
