@@ -321,3 +321,37 @@ button {
 button:hover {
   filter: brightness(1.3);
 }
+
+/* Ver Mapa */
+#ver.mapa {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#mapa {
+  border: 2px solid white;
+}
+
+.botones-movimiento {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-areas:
+    ". w ."
+    "a s d";
+}
+
+#boton-mover-arriba {
+  grid-area: w;
+}
+#boton-mover-izquierda {
+  grid-area: a;
+}
+#boton-mover-abajo {
+  grid-area: s;
+}
+#boton-mover-derecha {
+  grid-area: d;
+}

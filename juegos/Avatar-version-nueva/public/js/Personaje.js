@@ -6,6 +6,15 @@ export class Personaje {
     this.vidasMax = vidasMax;
     this.vidas = vidasMax;
     this.ataques = [];
+
+    this.mapaFoto = new Image();
+    this.mapaFoto.src = avatar;
+    this.x = 20;
+    this.y = 30;
+    this.ancho = 80;
+    this.alto = 80;
+    this.velocidadX = 0;
+    this.velocidadY = 0;
   }
 
   get nombrePersonaje() {
