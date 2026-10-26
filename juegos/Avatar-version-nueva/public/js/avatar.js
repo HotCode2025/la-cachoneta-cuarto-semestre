@@ -149,9 +149,6 @@ function confirmarSeleccionModal() {
 }
 
 function seleccionarPersonajeJugador() {
-  sectionVerMapa.style.display = "flex";
-  intervalo = setInterval(pintarPersonaje, 50);
-
   const radioSeleccionado = document.querySelector(
     'input[name="personaje"]:checked',
   );
@@ -178,6 +175,9 @@ function seleccionarPersonajeJugador() {
   seccionPersonaje.classList.add("ocultar");
   seccionReglas.classList.add("ocultar");
   seccionAtaque.classList.remove("ocultar");
+
+  sectionVerMapa.style.display = "flex";
+  iniciarMapa();
 }
 
 function seleccionarPersonajeEnemigo() {
@@ -228,11 +228,10 @@ function revisarVidas() {
 function crearMensajeFinal(mensajeResultadoFinal, jugadorGano) {
   let parrafo = document.createElement("p");
   parrafo.className = "log-ataque victoria";
-  if (jugadorGano === "PERDISTE LA RONDA.") {
+  if (!jugadorGano) {
     parrafo.className = "log-ataque derrota";
-  } else if (jugadorGano === "¡EMPATE!") {
-    parrafo.className = "log-ataque empate";
   }
+
   parrafo.innerHTML = `<strong>${mensajeResultadoFinal}</strong>`;
   seccionMensajes.prepend(parrafo);
 
@@ -250,7 +249,10 @@ function crearMensaje(ataqueJugador, ataqueComputadora, resultado) {
   parrafo.className = "log-ataque victoria";
   if (resultado === "PERDISTE LA RONDA.") {
     parrafo.className = "log-ataque derrota";
+  } else if (resultado === "¡EMPATE!") {
+    parrafo.className = "log-ataque empate";
   }
+
   parrafo.innerHTML = `Atacaste con <strong>${ataqueJugador}</strong> | Enemigo usó <strong>${ataqueComputadora}</strong><br><em>Resultado: ${resultado}</em>`;
   seccionMensajes.prepend(parrafo);
 }
@@ -305,54 +307,109 @@ const mapa = document.getElementById("mapa");
 
 /* Variables globales */
 let intervalo; //Dentro de esta variable vamos a hacer un setInterval, esta es la función que va llamando una función constantemente, esperando un poco de tiempo, así es que vamos a la línea de código donde estamos mostrando el mapa:
+let personajeJugadorObjeto;
 
 /* Logica */
 let lienzo = mapa.getContext("2d");
 let imagenDeAang = new Image();
 imagenDeAang.src = aang.avatarPersonaje; //esto ya esta cargado dentro de su objeto
 
+let mapaBackground = new Image();
+mapaBackground.src = "./assets/mapa.jpg";
+
 imagenDeAang.onload = function () {
   lienzo.drawImage(imagenDeAang, 20, 40, 100, 100);
 };
 
-function pintarPersonaje() {
+function pintarCanvas() {
   //dentro pegamos el código y hacemos modificaciones
+  personajeJugadorObjeto = obtenerObjetoPersonaje(nombrePersonajeJugador);
   lienzo.clearRect(0, 0, mapa.width, mapa.height); //Esta función limpia nuestro canvas, le decimos que limpiar
+  lienzo.drawImage(mapaBackground, 0, 0, mapa.width, mapa.height);
   lienzo.drawImage(
-    aang.mapaFoto, //cambiamos cada parámetro
-    (aang.x = aang.x + aang.velocidadX), //Ajustamos para ir actualizando dependiando de la velocidad
-    (aang.y = aang.y + aang.velocidadY),
-    aang.ancho,
-    aang.alto,
+    personajeJugadorObjeto.mapaFoto, //cambiamos cada parámetro
+    (personajeJugadorObjeto.x =
+      personajeJugadorObjeto.x + personajeJugadorObjeto.velocidadX), //Ajustamos para ir actualizando dependiando de la velocidad
+    (personajeJugadorObjeto.y =
+      personajeJugadorObjeto.y + personajeJugadorObjeto.velocidadY),
+    personajeJugadorObjeto.ancho,
+    personajeJugadorObjeto.alto,
   );
 }
 
 //a la posición que tenía x, le sumamos 5, esto quiere decir que se va amover 5px en x
-function moverAang({ derecha = 0, izquierda = 0, arriba = 0, abajo = 0 }) {
+function moverPersonaje({ derecha = 0, izquierda = 0, arriba = 0, abajo = 0 }) {
   //esta función va a actualizar la posición en x
-  aang.velocidadX = derecha + izquierda;
-  aang.velocidadY = arriba + abajo;
+  personajeJugadorObjeto = obtenerObjetoPersonaje(nombrePersonajeJugador);
+  personajeJugadorObjeto.velocidadX = derecha + izquierda;
+  personajeJugadorObjeto.velocidadY = arriba + abajo;
   console.log(derecha, izquierda, arriba, abajo);
-  console.log("Velocidad X:", aang.velocidadX, "Velocidad Y:", aang.velocidadY);
+  console.log(
+    "Velocidad X:",
+    personajeJugadorObjeto.velocidadX,
+    "Velocidad Y:",
+    personajeJugadorObjeto.velocidadY,
+  );
 }
 
-function detenerAang() {
-  aang.velocidadX = 0;
-  aang.velocidadY = 0;
+function detenerPersonaje() {
+  personajeJugadorObjeto = obtenerObjetoPersonaje(nombrePersonajeJugador);
+  personajeJugadorObjeto.velocidadX = 0;
+  personajeJugadorObjeto.velocidadY = 0;
 }
 
 botonMoverDerecha.addEventListener("mousedown", () =>
-  moverAang({ derecha: 5 }),
+  moverPersonaje({ derecha: 5 }),
 );
-botonMoverDerecha.addEventListener("mouseup", detenerAang);
+botonMoverDerecha.addEventListener("mouseup", detenerPersonaje);
 
 botonMoverIzquierda.addEventListener("mousedown", () =>
-  moverAang({ izquierda: -5 }),
+  moverPersonaje({ izquierda: -5 }),
 );
-botonMoverIzquierda.addEventListener("mouseup", detenerAang);
+botonMoverIzquierda.addEventListener("mouseup", detenerPersonaje);
 
-botonMoverArriba.addEventListener("mousedown", () => moverAang({ arriba: -5 }));
-botonMoverArriba.addEventListener("mouseup", detenerAang);
+botonMoverArriba.addEventListener("mousedown", () =>
+  moverPersonaje({ arriba: -5 }),
+);
+botonMoverArriba.addEventListener("mouseup", detenerPersonaje);
 
-botonMoverAbajo.addEventListener("mousedown", () => moverAang({ abajo: 5 }));
-botonMoverAbajo.addEventListener("mouseup", detenerAang);
+botonMoverAbajo.addEventListener("mousedown", () =>
+  moverPersonaje({ abajo: 5 }),
+);
+botonMoverAbajo.addEventListener("mouseup", detenerPersonaje);
+
+function sePresionoUnaTecla(event) {
+  switch (event.key) {
+    case "ArrowUp":
+      moverPersonaje({ arriba: -5 });
+      break;
+    case "ArrowDown":
+      moverPersonaje({ abajo: 5 });
+      break;
+    case "ArrowLeft":
+      moverPersonaje({ izquierda: -5 });
+      break;
+    case "ArrowRight":
+      moverPersonaje({ derecha: 5 });
+      break;
+    default:
+      break;
+  }
+}
+
+function iniciarMapa() {
+  mapa.width = 320; //Para el ancho
+  mapa.height = 240; //Para el alto
+  intervalo = setInterval(pintarCanvas, 50);
+
+  window.addEventListener("keydown", sePresionoUnaTecla); //Escucha cuando se presiona una tecla, y agregamos la función que debemos construir
+  window.addEventListener("keyup", detenerPersonaje); //Creamos otro evento para detener el movimiento
+}
+
+function obtenerObjetoPersonaje(personajeJugador) {
+  for (let i = 0; i < PERSONAJES.length; i++) {
+    if (personajeJugador === PERSONAJES[i].nombre) {
+      return PERSONAJES[i];
+    }
+  }
+}
