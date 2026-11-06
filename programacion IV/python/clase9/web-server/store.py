@@ -8,5 +8,5 @@ def get_razas():
     #En este caso es: un String por el text, pero aqui
     #encontramos un diccionario con listas.
     razas = r.json()
-    for raza in razas.values(): #utilizamos la funcion para los valores del diccionario
-        print(f"Raza de los perritos: {raza}") #Estamos recorriendo los valores del diccionario
+    for raza in razas['message']: #tomamos solo la lista de razas, no el campo status
+        print(f"Raza de los perritos: {raza}") #Estamos recorriendo la lista de razas

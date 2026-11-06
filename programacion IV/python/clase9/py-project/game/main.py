@@ -8,7 +8,6 @@ def choose_options():
 
     if not user_option in options:
         print('!!! Esa opcion no es valida')
-        # continue
         return None, None
 
     computer_option = random.choice(options)
@@ -61,9 +60,12 @@ def run_game():
         print(f"       * ROUND {rounds} *")
         print('       ***********')
         print(f"Oponente  {computer_wins} - {user_wins}  Usuario\n")
-        rounds += 1
 
         user_option, computer_option = choose_options()
+        if user_option is None:
+            continue
+
+        rounds += 1
         user_wins, computer_wins = check_rules(
             user_option, computer_option, user_wins, computer_wins)
 

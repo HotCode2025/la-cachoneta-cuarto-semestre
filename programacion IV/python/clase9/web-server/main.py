@@ -11,7 +11,7 @@ def get_list(): #Va a devolver una lista
 
 #Segunda ruta
 @app.get('/contact', response_class=HTMLResponse)
-def get_list():
+def get_contact():
     return"""
             <h1> Soy un sitio web </h1>
             <p> Soy un parrafo para que me leas </p>
