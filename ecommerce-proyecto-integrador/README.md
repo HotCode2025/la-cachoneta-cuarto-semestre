@@ -4,3 +4,8 @@
 | :--- | :--- |
 | Repositorio | https://github.com/DogeTale/e-commerce2022-tup2025 |
 | Deploy | https://zerolag-xi.vercel.app/ |
+
+| Backend | Links |
+| :--- | :--- |
+| Repositorio | https://github.com/EmmanuelYapura/backend-ecommerce-lc |
+| Deploy | https://backend-ecommerce-lc.onrender.com/api/productos |
