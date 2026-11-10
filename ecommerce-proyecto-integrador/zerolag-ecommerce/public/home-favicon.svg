@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44" fill="none">
+  <!-- Flat geometric icon: polygon bolt / low-latency chevron -->
+  <rect x="0" y="0" width="44" height="44" rx="4" fill="#D32F2F" />
+  <path d="M28 14L16 32H27L24 46L36 28H25L28 14Z" fill="#FFFFFF" transform="translate(-4, -8)" />
+</svg>
